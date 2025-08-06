@@ -1,0 +1,51 @@
+{% extends "inicio/encabezado.html" %}
+
+{% block tilulo %}comentarios{% endblock %}
+{% block tilulo1 %}Comentarios{% endblock %}
+{% block tilulo2 %}Consulta General{% endblock %}
+
+{%block imagen%}
+{%load static%}
+{%static 'inicio/images/comentarios.png'%}
+{%endblock%}
+
+{% block contenido %}
+<div class="page-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Comentarios
+                <small>Consulta general</small>
+            </h3>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Mensaje</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in comentarios %}
+            <tr>
+                <td>{{ c.usuario }}</td>
+                <td>{{ c.mensaje }}</td>
+                <td>
+                    <a href="{% url 'ConsultaIndividual' c.id %}" class="btn btn-sm">Editar</a>
+                </td>
+                <td>
+                    <a href="{% url 'Eliminar' c.id %}" class="btn btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay comentarios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
